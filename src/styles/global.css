@@ -1,0 +1,385 @@
+/* ---------------------------------------------------------------------------
+   Tokens
+--------------------------------------------------------------------------- */
+:root {
+  --paper: #efede7;
+  --paper-sunk: #e5e2d9;
+  --card: #fbfaf7;
+  --ink: #14171a;
+  --ink-soft: #4d5359;
+  --ink-faint: #8a8f93;
+  --rule: #d3cfc4;
+  --rule-strong: #b6b1a4;
+  --ball: #8c2115;
+  --ball-dark: #6c1710;
+  --pitch: #24422c;
+  --danger: #a3271b;
+  --focus: #1c4ed8;
+
+  --shell: 1140px;
+  --gutter: 24px;
+
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.125rem;
+  --step-2: 1.375rem;
+
+  --sans: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --display: 'Big Shoulders Display', 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--step-0);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 12px 18px;
+}
+.skip-link:focus {
+  left: 12px;
+  top: 12px;
+}
+
+.lede {
+  font-size: var(--step-1);
+  color: var(--ink-soft);
+  max-width: 54ch;
+}
+
+.section-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-transform: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Buttons
+--------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 26px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  background: var(--ball);
+  color: #fff;
+  font-family: var(--sans);
+  font-size: var(--step-0);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.btn:hover {
+  background: var(--ball-dark);
+}
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--rule-strong);
+}
+.btn--ghost:hover {
+  background: var(--paper-sunk);
+  border-color: var(--ink);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* ---------------------------------------------------------------------------
+   Navbar
+--------------------------------------------------------------------------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 68px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.brand__mark {
+  flex: none;
+  width: 30px;
+  height: 30px;
+}
+
+.brand__name {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  line-height: 1;
+  letter-spacing: 0.005em;
+}
+
+.brand__season {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  margin-top: 3px;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav__link {
+  position: relative;
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  padding: 6px 0;
+}
+.nav__link:hover {
+  color: var(--ink);
+}
+.nav__link[aria-current='page'] {
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: inset 0 -2px 0 var(--ball);
+}
+
+.nav__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav__cta {
+  min-height: 42px;
+  padding: 0 20px;
+  font-size: 0.9375rem;
+}
+
+.nav__toggle {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 12px;
+  background: transparent;
+  border: 1px solid var(--rule-strong);
+  border-radius: 2px;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.nav__toggle-bars {
+  display: grid;
+  gap: 4px;
+  width: 16px;
+}
+.nav__toggle-bars span {
+  display: block;
+  height: 2px;
+  background: var(--ink);
+}
+
+.nav__drawer {
+  border-top: 1px solid var(--rule);
+  padding: 12px 0 20px;
+  display: grid;
+  gap: 4px;
+}
+
+.nav__drawer .nav__link {
+  padding: 12px 0;
+  font-size: 1.0625rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.nav__drawer .btn {
+  margin-top: 14px;
+}
+
+@media (max-width: 760px) {
+  .nav__links,
+  .nav__right .nav__cta {
+    display: none;
+  }
+  .nav__toggle {
+    display: inline-flex;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Footer
+--------------------------------------------------------------------------- */
+.footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 96px;
+  padding: 40px 0 56px;
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.footer__contact {
+  display: grid;
+  gap: 4px;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+.footer__contact a {
+  color: var(--ink);
+}
+
+.footer__legal {
+  font-size: var(--step--1);
+  color: var(--ink-faint);
+}
+
+/* ---------------------------------------------------------------------------
+   Simple pages (About, 404)
+--------------------------------------------------------------------------- */
+.page {
+  padding: 72px 0 0;
+}
+
+.page__head {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 28px;
+  margin-bottom: 40px;
+}
+
+.page__title {
+  font-size: clamp(2.75rem, 8vw, 4.5rem);
+}
+
+.prose {
+  display: grid;
+  gap: 18px;
+  max-width: 62ch;
+  color: var(--ink-soft);
+}
+
+.notice {
+  border: 1px solid var(--rule-strong);
+  border-left: 4px solid var(--pitch);
+  background: var(--card);
+  padding: 20px 22px;
+  margin-top: 36px;
+  max-width: 62ch;
+}
+
+.notice h2 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.notice ul {
+  margin: 12px 0 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 8px;
+  color: var(--ink-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

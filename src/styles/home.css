@@ -1,0 +1,288 @@
+/* ---------------------------------------------------------------------------
+   Hero
+--------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--rule);
+  padding: 72px 0 80px;
+}
+
+.hero__seam {
+  position: absolute;
+  right: -180px;
+  top: -60px;
+  width: 620px;
+  color: var(--rule-strong);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 56px;
+  align-items: start;
+}
+
+.hero__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--pitch);
+  margin-bottom: 22px;
+}
+
+.hero__status::before {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--pitch);
+}
+
+.hero__title {
+  font-size: clamp(3.75rem, 11vw, 7.5rem);
+  letter-spacing: -0.005em;
+}
+
+.hero__title span {
+  display: block;
+}
+
+.hero__rule {
+  width: 84px;
+  height: 4px;
+  background: var(--ball);
+  margin: 26px 0 22px;
+}
+
+.hero__text {
+  font-size: var(--step-1);
+  color: var(--ink-soft);
+  max-width: 46ch;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+/* ---------------------------------------------------------------------------
+   Fixtures board — the one loud element on the page
+--------------------------------------------------------------------------- */
+.board {
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 2px;
+}
+
+.board__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 22px;
+  border-bottom: 1px solid rgba(239, 237, 231, 0.22);
+}
+
+.board__title {
+  font-family: var(--display);
+  font-size: 1.625rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.board__count {
+  font-size: 0.8125rem;
+  color: rgba(239, 237, 231, 0.65);
+}
+
+.board__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.board__row {
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr);
+  gap: 18px;
+  padding: 18px 22px;
+  border-bottom: 1px solid rgba(239, 237, 231, 0.14);
+}
+.board__row:last-child {
+  border-bottom: 0;
+}
+
+.board__day {
+  font-family: var(--display);
+  font-weight: 700;
+  line-height: 0.85;
+}
+.board__day strong {
+  display: block;
+  font-size: 2.75rem;
+  font-weight: 700;
+}
+.board__day span {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--paper);
+  opacity: 0.7;
+  margin-top: 6px;
+}
+
+.board__city {
+  font-family: var(--display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.05;
+}
+
+.board__venue,
+.board__time {
+  font-size: 0.875rem;
+  color: rgba(239, 237, 231, 0.72);
+  overflow-wrap: anywhere;
+}
+
+.board__time {
+  margin-top: 2px;
+}
+
+.board__state {
+  padding: 26px 22px;
+  font-size: 0.9375rem;
+  color: rgba(239, 237, 231, 0.78);
+}
+
+.board__state .btn {
+  margin-top: 16px;
+}
+
+.board__foot {
+  padding: 16px 22px;
+  border-top: 1px solid rgba(239, 237, 231, 0.22);
+  font-size: 0.8125rem;
+  color: rgba(239, 237, 231, 0.65);
+}
+
+/* ---------------------------------------------------------------------------
+   Content sections
+--------------------------------------------------------------------------- */
+.band {
+  padding: 80px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.band__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 48px;
+}
+
+.band__body {
+  display: grid;
+  gap: 18px;
+  color: var(--ink-soft);
+  max-width: 62ch;
+}
+
+.steps {
+  list-style: none;
+  counter-reset: step;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.steps li {
+  counter-increment: step;
+  border-top: 2px solid var(--ink);
+  padding-top: 16px;
+}
+
+.steps li::before {
+  content: counter(step);
+  display: block;
+  font-family: var(--display);
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ball);
+  margin-bottom: 8px;
+}
+
+.steps h3 {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.steps p {
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+}
+
+.closing {
+  padding: 72px 0 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.closing h2 {
+  font-size: clamp(2.25rem, 6vw, 3.5rem);
+  max-width: 16ch;
+}
+
+/* ---------------------------------------------------------------------------
+   Responsive
+--------------------------------------------------------------------------- */
+@media (max-width: 960px) {
+  .hero__inner,
+  .band__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+  .hero__seam {
+    right: -220px;
+    top: -120px;
+    width: 460px;
+  }
+  .steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    padding: 48px 0 56px;
+  }
+  .band {
+    padding: 56px 0;
+  }
+  .hero__actions .btn {
+    width: 100%;
+  }
+  .board__row {
+    grid-template-columns: 62px minmax(0, 1fr);
+    gap: 14px;
+    padding: 16px 18px;
+  }
+  .board__day strong {
+    font-size: 2.25rem;
+  }
+}
