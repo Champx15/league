@@ -5,29 +5,21 @@
 // -----------------------------------------------------------------------------
 
 export const league = {
-  name: 'City Cricket League',
-  shortName: 'CCL',
+  name: 'JIM Premier League',
+  shortName: 'JPL',
   // Shown under the logo in the navbar and in the footer.
   season: 'Season trials',
 
   hero: {
     headline: 'Trials are open.',
     subhead:
-      'Register once for the season trials. Choose the trial you can attend, submit your details, and carry your Player ID with you on the day.',
+      'Register for the season trials. Submit your details and the league will follow up with next steps.',
   },
 
   // Replace with the league's own description when it is ready.
   about: [
     'Details about the league — its format, age groups, teams and season calendar — will be published here.',
     'Until then, registration is the only thing you need to do. Everything a player must know before the trial is listed on this page.',
-  ],
-
-  // Replace with the league's real trial instructions.
-  trialNotes: [
-    'Reach the venue at the reporting time listed for your trial.',
-    'Bring your own kit. Whites or coloured clothing are both fine.',
-    'Carry a photo ID and your Player ID, printed or on your phone.',
-    'Players under 18 should be accompanied by a parent or guardian.',
   ],
 
   contact: {

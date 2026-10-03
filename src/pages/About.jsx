@@ -16,8 +16,8 @@ export default function About() {
           <p key={paragraph}>{paragraph}</p>
         ))}
         <p>
-          Registration for the season trials is open now, and everything a player needs for trial day is
-          listed on the home page.
+          Registration for the season trials is open now. The league will follow up with registered
+          players about next steps.
         </p>
       </div>
 
@@ -36,7 +36,7 @@ export default function About() {
           Register now
         </Link>
         <Link className="btn btn--ghost" to="/">
-          See trial dates
+          Back to home
         </Link>
       </div>
     </div>

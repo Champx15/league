@@ -1,91 +1,45 @@
 # City Cricket League — player registration
 
-React + Vite frontend for cricket league trial registration. Supabase is the only backend.
+React + Vite frontend for player registration. Registration, database access, and payment-order creation are handled by the Cloudflare Worker; payments use Razorpay Checkout.
 
 ## Setup
 
 ```bash
 npm install
-cp .env.example .env     # fill in your project values
+cp .env.example .env
 npm run dev
 ```
 
-`.env`:
+Set the Worker base URL in `.env`:
 
 ```env
-VITE_SUPABASE_URL=https://your-project.supabase.co
-VITE_SUPABASE_ANON_KEY=your-anon-key
+VITE_API_BASE_URL=https://your-worker.your-subdomain.workers.dev
 ```
 
-Only the anon/public key is used. There is no service-role key anywhere in this codebase.
+Use the Worker origin only (no trailing slash or endpoint path). Restart Vite after changing environment variables. Do not put Supabase service-role keys, Razorpay secrets, or other private credentials in the frontend environment. The Razorpay key ID is returned by the Worker at checkout time; its secret remains server-side.
+
+## Worker integration
+
+The registration page uses:
+
+- `POST /submission` to validate and save the player, determine the server-side fee, and create a Razorpay order.
+- Razorpay Checkout to collect payment.
+- `POST /payment/verify` to verify the checkout signature and confirm payment.
+
+The frontend sends the category and proficiency options in the Worker’s expected format. The Worker response `playerId` (the registration ID), `orderId`, `amount`, `currency`, and `keyId` are used to launch checkout. An interrupted checkout can be reopened against the existing order, and a failed confirmation can be retried without creating another payment.
+
+Configure the Worker’s CORS allowlist to include the exact frontend origins. The supplied backend currently permits `http://localhost:5500`, `http://127.0.0.1:5500`, and `https://myapp.com`; Vite normally serves on `http://localhost:5173`, so add that (and the actual deployed site origin) if applicable.
+
+Razorpay webhook signature verification, database writes, and admin API authentication stay entirely in the Worker. The wildcard `app.all("*")` handler from the supplied backend is intentionally not used by this frontend.
 
 ## Routes
 
 | Route | Page |
 | --- | --- |
-| `/` | Landing page, with the live trial schedule read from `trial_sessions` |
+| `/` | Landing page and registration overview |
 | `/about` | About us placeholder |
-| `/registration` | Registration form, insert into `players`, success screen with the Player ID |
+| `/registration` | Player registration and Razorpay payment |
 
 ## Where to edit content
 
-All placeholder league copy (name, hero text, about paragraphs, trial-day notes, contact details)
-lives in `src/config/league.js`. Nothing else needs touching to rebrand the site.
-
-## One thing to check on the database side
-
-The success screen shows `players.id` returned by Postgres. Supabase only returns the inserted row
-if the anon role can also `SELECT` it — with insert-only RLS, `insert().select()` comes back empty.
-
-The app handles this: the registration is still saved and a success screen is shown, but the ID
-cannot be displayed. To show the Player ID, add a `SECURITY DEFINER` function and call it instead of
-the direct insert, or add a narrow SELECT policy. The simplest version:
-
-```sql
-create or replace function public.register_player(payload jsonb)
-returns uuid
-language plpgsql
-security definer
-set search_path = public
-as $$
-declare new_id uuid;
-begin
-  insert into public.players (
-    player_name, date_of_birth, jersey_number, father_name, mother_name,
-    father_mobile, state, pincode, trial_session_id, proficiency,
-    full_address, player_mobile, whatsapp_number, email
-  )
-  select
-    payload->>'player_name', (payload->>'date_of_birth')::date,
-    nullif(payload->>'jersey_number','')::int, payload->>'father_name',
-    payload->>'mother_name', payload->>'father_mobile', payload->>'state',
-    payload->>'pincode', (payload->>'trial_session_id')::uuid,
-    array(select jsonb_array_elements_text(payload->'proficiency')),
-    payload->>'full_address', payload->>'player_mobile',
-    payload->>'whatsapp_number', payload->>'email'
-  returning id into new_id;
-  return new_id;
-end;
-$$;
-
-grant execute on function public.register_player(jsonb) to anon;
-```
-
-Then swap the insert in `src/pages/Registration.jsx` for
-`supabase.rpc('register_player', { payload })`.
-
-If your RLS already allows the anon role to read back its own insert, nothing needs to change —
-the ID shows up as it is.
-
-## Structure
-
-```
-src/
-  components/   Navbar, Footer, Field, FixtureBoard, Seam (SVG marks)
-  config/       league.js — all editable copy
-  data/         Indian states/UTs, proficiency options
-  hooks/        useTrialSessions — shared Supabase fetch
-  lib/          supabase.js, format.js
-  pages/        Home, About, Registration, NotFound
-  styles/       global.css, home.css, registration.css
-```
+League copy lives in `src/config/league.js`. Indian states/union territories and category proficiency options live in `src/data/`.

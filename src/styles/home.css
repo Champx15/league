@@ -21,8 +21,8 @@
 .hero__inner {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: 56px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
   align-items: start;
 }
 
@@ -71,108 +71,6 @@
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 32px;
-}
-
-/* ---------------------------------------------------------------------------
-   Fixtures board — the one loud element on the page
---------------------------------------------------------------------------- */
-.board {
-  background: var(--ink);
-  color: var(--paper);
-  border-radius: 2px;
-}
-
-.board__head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 18px 22px;
-  border-bottom: 1px solid rgba(239, 237, 231, 0.22);
-}
-
-.board__title {
-  font-family: var(--display);
-  font-size: 1.625rem;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.board__count {
-  font-size: 0.8125rem;
-  color: rgba(239, 237, 231, 0.65);
-}
-
-.board__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.board__row {
-  display: grid;
-  grid-template-columns: 74px minmax(0, 1fr);
-  gap: 18px;
-  padding: 18px 22px;
-  border-bottom: 1px solid rgba(239, 237, 231, 0.14);
-}
-.board__row:last-child {
-  border-bottom: 0;
-}
-
-.board__day {
-  font-family: var(--display);
-  font-weight: 700;
-  line-height: 0.85;
-}
-.board__day strong {
-  display: block;
-  font-size: 2.75rem;
-  font-weight: 700;
-}
-.board__day span {
-  display: block;
-  font-family: var(--sans);
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--paper);
-  opacity: 0.7;
-  margin-top: 6px;
-}
-
-.board__city {
-  font-family: var(--display);
-  font-size: 1.75rem;
-  font-weight: 600;
-  line-height: 1.05;
-}
-
-.board__venue,
-.board__time {
-  font-size: 0.875rem;
-  color: rgba(239, 237, 231, 0.72);
-  overflow-wrap: anywhere;
-}
-
-.board__time {
-  margin-top: 2px;
-}
-
-.board__state {
-  padding: 26px 22px;
-  font-size: 0.9375rem;
-  color: rgba(239, 237, 231, 0.78);
-}
-
-.board__state .btn {
-  margin-top: 16px;
-}
-
-.board__foot {
-  padding: 16px 22px;
-  border-top: 1px solid rgba(239, 237, 231, 0.22);
-  font-size: 0.8125rem;
-  color: rgba(239, 237, 231, 0.65);
 }
 
 /* ---------------------------------------------------------------------------
@@ -276,13 +174,5 @@
   }
   .hero__actions .btn {
     width: 100%;
-  }
-  .board__row {
-    grid-template-columns: 62px minmax(0, 1fr);
-    gap: 14px;
-    padding: 16px 18px;
-  }
-  .board__day strong {
-    font-size: 2.25rem;
   }
 }

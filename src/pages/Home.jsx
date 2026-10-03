@@ -1,14 +1,9 @@
 import { Link } from 'react-router-dom'
-import FixtureBoard from '../components/FixtureBoard'
 import { SeamArc } from '../components/Seam'
-import { useTrialSessions } from '../hooks/useTrialSessions'
 import { league } from '../config/league'
 import '../styles/home.css'
 
 export default function Home() {
-  const { sessions, status, errorMessage, reload } = useTrialSessions()
-  const hasTrials = status === 'ready' && sessions.length > 0
-
   return (
     <>
       <section className="hero">
@@ -16,14 +11,7 @@ export default function Home() {
         <div className="shell hero__inner">
           <div>
             <p className="hero__status">
-              {status === 'loading' && 'Checking trial dates'}
-              {status === 'error' && 'Registration is open'}
-              {status === 'ready' &&
-                (hasTrials
-                  ? `Registration is open for ${sessions.length} ${
-                      sessions.length === 1 ? 'trial' : 'trials'
-                    }`
-                  : 'Registration opens with the next trial dates')}
+              Registration is open
             </p>
 
             <h1 className="hero__title">
@@ -42,12 +30,6 @@ export default function Home() {
             </div>
           </div>
 
-          <FixtureBoard
-            sessions={sessions}
-            status={status}
-            errorMessage={errorMessage}
-            onRetry={reload}
-          />
         </div>
       </section>
 
@@ -60,21 +42,6 @@ export default function Home() {
             {league.about.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="band" aria-labelledby="trial-heading">
-        <div className="shell band__grid">
-          <h2 className="section-title" id="trial-heading">
-            On trial day
-          </h2>
-          <div className="band__body">
-            <ul style={{ margin: 0, paddingLeft: '20px', display: 'grid', gap: '10px' }}>
-              {league.trialNotes.map((note) => (
-                <li key={note}>{note}</li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>
@@ -93,10 +60,9 @@ export default function Home() {
               </p>
             </li>
             <li>
-              <h3>Pick your trial</h3>
+              <h3>Stay in touch</h3>
               <p>
-                Choose the city and date you can attend from the scheduled trials. One registration covers
-                one trial.
+                The league will follow up with next steps using the contact details you provide.
               </p>
             </li>
             <li>
