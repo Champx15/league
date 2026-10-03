@@ -218,7 +218,7 @@ export default function Registration() {
       key: order.keyId,
       amount: order.amount,
       currency: order.currency,
-      name: 'City Cricket League',
+      name: 'Jim Premier League',
       description: 'Player registration fee',
       order_id: order.orderId,
       prefill: {
