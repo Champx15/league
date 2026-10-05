@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { league } from '../config/league'
-import { BallMark } from './Seam'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -29,10 +28,9 @@ export default function Navbar() {
     <header className="nav">
       <div className="shell nav__inner">
         <Link className="brand" to="/">
-          <BallMark className="brand__mark" />
+          <img className="brand__mark" src="/jpl-logo.png" alt="JIM Premier League logo" />
           <span>
             <span className="brand__name">{league.name}</span>
-            <span className="brand__season">{league.season}</span>
           </span>
         </Link>
 

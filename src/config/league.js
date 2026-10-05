@@ -13,7 +13,7 @@ export const league = {
   hero: {
     headline: 'Trials are open.',
     subhead:
-      'Register for the season trials. Submit your details and the league will follow up with next steps.',
+      'Register for the trials. Submit your details and the league will follow up with next steps.',
   },
 
   // Replace with the league's own description when it is ready.
@@ -23,7 +23,7 @@ export const league = {
   ],
 
   contact: {
-    email: 'registrations@example.com',
-    phone: '+91 00000 00000',
+    email: 'jimpremierleaguejpl@gmail.com',
+    phone: '+91 9923657132',
   },
 }
