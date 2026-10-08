@@ -122,6 +122,13 @@ export default function PlayerStories() {
     loadingNextPageRef.current = false
   }, [reviews.length])
 
+  useEffect(() => {
+    if (!submitted) return undefined
+
+    const timeoutId = window.setTimeout(() => setSubmitted(false), 3000)
+    return () => window.clearTimeout(timeoutId)
+  }, [submitted])
+
   function openForm() {
     setSubmitted(false)
     setForm({ firstName: '', state: '', proficiency: '', review: '', stars: 5 })

@@ -6,6 +6,15 @@ import { states, unionTerritories } from '../data/indianStates'
 import { proficiencyGroups } from '../data/proficiency'
 import '../styles/registration.css'
 
+const trialCities = [
+  'Siddharth Nagar',
+  'Maharajganj',
+  'Lucknow',
+  'Gorakhpur',
+  'Basti',
+  'Kanpur'
+]
+
 const EMPTY_FORM = {
   player_name: '',
   date_of_birth: '',
@@ -18,6 +27,7 @@ const EMPTY_FORM = {
   full_address: '',
   player_mobile: '',
   email: '',
+  trial_city: '',
 }
 
 const today = new Date().toISOString().slice(0, 10)
@@ -61,6 +71,8 @@ function validate(form, proficiency) {
   }
 
   if (!form.state) errors.state = 'Select a state or union territory.'
+
+  if (!form.trial_city) errors.trial_city = 'Select a trial city.'
 
   if (!/^[1-9]\d{5}$/.test(form.pincode.trim())) {
     errors.pincode = 'A pincode is 6 digits.'
@@ -181,6 +193,7 @@ export default function Registration() {
         proficiency.options.length > 0
           ? proficiency.options
           : [proficiencyGroups.find((group) => group.id === proficiency.groupId).label],
+      trial_city: form.trial_city,
       full_address: form.full_address.trim(),
       player_mobile: normalisePhone(form.player_mobile),
       email: form.email.trim() ? form.email.trim() : null,
@@ -707,6 +720,27 @@ export default function Registration() {
             </p>
           )}
         </fieldset>
+
+        <Field id="trial_city" label="Trial city" required error={errors.trial_city}>
+          {({ describedBy, invalid }) => (
+            <select
+              className="input"
+              id="trial_city"
+              value={form.trial_city}
+              onChange={(event) => setValue('trial_city', event.target.value)}
+              aria-describedby={describedBy}
+              aria-invalid={invalid}
+              ref={(node) => (fieldRefs.current.trial_city = node)}
+            >
+              <option value="">Select a city</option>
+              {trialCities.map((city) => (
+                <option key={city} value={city}>
+                  {city}
+                </option>
+              ))}
+            </select>
+          )}
+        </Field>
 
         <div className="submit">
           {submitError && (

@@ -101,9 +101,9 @@ export default function Home() {
         <div className="shell hero__inner">
           <div className="hero__copy">
             <p className="hero__status">Registration is open</p>
-            <h1 className="hero__title">
+            {/* <h1 className="hero__title">
               <span>{league.hero.headline}</span>
-            </h1>
+            </h1> */}
             <p className="hero__text">{league.hero.subhead}</p>
             <div className="hero__actions">
               <RegisterLink>Register for trials</RegisterLink>

@@ -10,7 +10,7 @@ export const league = {
   season: 'Season trials',
 
   hero: {
-    headline: 'Trials are open.',
+    // headline: 'Trials are open.',
     subhead:
       'Step into the next chapter of your cricket journey with JPL. Register for the trials and follow the path from first strike to the league.',
   },
