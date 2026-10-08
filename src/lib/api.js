@@ -51,6 +51,22 @@ export function createRegistration(payload) {
   })
 }
 
+export function getReviews({ page = 1, limit = 10 } = {}) {
+  const params = new URLSearchParams({
+    page: String(page),
+    limit: String(limit),
+  })
+
+  return request(`/reviews?${params.toString()}`)
+}
+
+export function addReview(payload) {
+  return request('/reviews', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  })
+}
+
 export function verifyPayment(payment) {
   return request('/payment/verify', {
     method: 'POST',

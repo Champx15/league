@@ -7,23 +7,21 @@
 export const league = {
   name: 'JIM Premier League',
   shortName: 'JPL',
-  // Shown under the logo in the navbar and in the footer.
   season: 'Season trials',
 
   hero: {
     headline: 'Trials are open.',
     subhead:
-      'Register for the trials. Submit your details and the league will follow up with next steps.',
+      'Step into the next chapter of your cricket journey with JPL. Register for the trials and follow the path from first strike to the league.',
   },
 
-  // Replace with the league's own description when it is ready.
   about: [
-    'Details about the league — its format, age groups, teams and season calendar — will be published here.',
-    'Until then, registration is the only thing you need to do. Everything a player must know before the trial is listed on this page.',
+    'JPL is an aspiring cricket league built to create a clear, competitive path for players who want to train, perform and progress.',
+    'The league is creating a community around cricket, player development and meaningful opportunities for athletes from across the region.',
   ],
 
   contact: {
     email: 'jimpremierleaguejpl@gmail.com',
-    phone: '+91 9923657132',
+    phone: '+91 9935176586',
   },
 }

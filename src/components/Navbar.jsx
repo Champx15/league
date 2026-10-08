@@ -28,7 +28,7 @@ export default function Navbar() {
     <header className="nav">
       <div className="shell nav__inner">
         <Link className="brand" to="/">
-          <img className="brand__mark" src="/jpl-logo.png" alt="JIM Premier League logo" />
+          <img className="brand__mark" src="/jpl-logo.png" alt="JPL logo" />
           <span>
             <span className="brand__name">{league.name}</span>
           </span>
