@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { addReview, getReviews } from '../lib/api'
-import { states } from '../data/indianStates'
+import { states, unionTerritories } from '../data/indianStates'
 
 const PAGE_SIZE = 6
-const categories = ['Batter', 'Bowler', 'AllRounder', 'WicketKeeper']
+const proficiencyOptions = ['Batter', 'Fast Bowler', 'Spin Bowler', 'All Rounder', 'Wicket Keeper']
 
 function StarRating({ stars, interactive = false, onChange }) {
   const safeStars = Math.max(0, Math.min(5, Number(stars) || 0))
@@ -47,7 +47,7 @@ export default function PlayerStories() {
   const [form, setForm] = useState({
     firstName: '',
     state: '',
-    category: '',
+    proficiency: '',
     review: '',
     stars: 5,
   })
@@ -124,7 +124,7 @@ export default function PlayerStories() {
 
   function openForm() {
     setSubmitted(false)
-    setForm({ firstName: '', state: '', category: '', review: '', stars: 5 })
+    setForm({ firstName: '', state: '', proficiency: '', review: '', stars: 5 })
     setIsModalOpen(true)
   }
 
@@ -137,17 +137,26 @@ export default function PlayerStories() {
     event.preventDefault()
     setIsSubmitting(true)
 
+    const reviewPayload = {
+      name: form.firstName.trim(),
+      state: form.state,
+      proficiency: form.proficiency,
+      review: form.review.trim(),
+      stars: form.stars,
+    }
+    const optimisticReview = {
+      ...reviewPayload,
+      id: `local-${Date.now()}`,
+      created_at: new Date().toISOString(),
+    }
+
+    setReviews((current) => [optimisticReview, ...current])
+    setSubmitted(true)
+    setIsModalOpen(false)
+
     try {
-      await addReview({
-        name: form.firstName.trim(),
-        state: form.state,
-        category: form.category,
-        review: form.review.trim(),
-        stars: form.stars,
-      })
+      await addReview(reviewPayload)
       setIsSubmitting(false)
-      setSubmitted(true)
-      setIsModalOpen(false)
     } catch (requestError) {
       setIsSubmitting(false)
       setError(requestError.message)
@@ -252,16 +261,16 @@ export default function PlayerStories() {
                 <label>
                   State
                   <select value={form.state} onChange={(event) => setForm((current) => ({ ...current, state: event.target.value }))} required>
-                    <option value="">Choose a state</option>
-                    {states.map((state) => <option key={state} value={state}>{state}</option>)}
+                    <option value="">Choose a state or union territory</option>
+                    {[...states, ...unionTerritories].map((state) => <option key={state} value={state}>{state}</option>)}
                   </select>
                 </label>
               </div>
               <label>
-                Category
-                <select value={form.category} onChange={(event) => setForm((current) => ({ ...current, category: event.target.value }))} required>
-                  <option value="">Choose a category</option>
-                  {categories.map((category) => <option key={category} value={category}>{category}</option>)}
+                Proficiency
+                <select value={form.proficiency} onChange={(event) => setForm((current) => ({ ...current, proficiency: event.target.value }))} required>
+                  <option value="">Choose a playing category</option>
+                  {proficiencyOptions.map((proficiency) => <option key={proficiency} value={proficiency}>{proficiency}</option>)}
                 </select>
               </label>
               <label>
