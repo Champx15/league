@@ -12,7 +12,11 @@ const trialCities = [
   'Lucknow',
   'Gorakhpur',
   'Basti',
-  'Kanpur'
+  'Kanpur',
+  'Noida',
+  'Bareilly',
+  'Ghaziabad',
+  'Azamgarh',
 ]
 
 const EMPTY_FORM = {
@@ -397,6 +401,10 @@ export default function Registration() {
   return (
     <div className="shell reg">
       <header className="reg__head">
+        {/* <p>चयन में प्रदर्शन ही मायने रखेगा। 🏏</p>
+        <p>JPL
+“Naam Nahi, Performance Bolega!”
+हर खिलाड़ी को बराबर मौका, चयन सिर्फ प्रदर्शन के आधार पर।</p> */}
         <h1 className="reg__title">Player registration</h1>
         <p className="reg__intro">
           One form, about three minutes. Fields marked with{' '}
