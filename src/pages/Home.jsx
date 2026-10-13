@@ -12,12 +12,9 @@ const trials = Array.from({ length: 5 }, (_, index) => ({
 }))
 
 const impact = [
-  { value: '—', label: 'Total prize pool', note: 'Details to be published' },
-  { value: '—', label: 'Trial cities', note: 'Details to be published' },
-  { value: '—', label: 'Players', note: 'Details to be published' },
-  { value: '—', label: 'Teams', note: 'Details to be published' },
-  { value: '—', label: 'Trials', note: 'Details to be published' },
-  { value: '—', label: 'Seasons', note: 'Details to be published' },
+  { value: '15 LAKHS', label: 'TOTAL PRIZE POOL', note: 'Details to be published' },
+  { value: '20+', label: 'TRIAL CITIES', note: 'Details to be published' },
+  {value: '100%',label: 'ON-GROUND TRIALS'}
 ]
 
 const faqs = [
