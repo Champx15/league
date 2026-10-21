@@ -18,6 +18,7 @@ const trialCities = [
   "Basti",
   "Ghaziabad",
   "Gorakhpur",
+  "Jaunpur",
   "Jhansi",
   "Kanpur",
   "Lucknow",
